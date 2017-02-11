@@ -52,8 +52,8 @@ if (isset($_POST['user']) &&
 
 $content = '../main.php';
 if (isset($_SESSION['id'])) {
-	if (isset($_GET['challenge']) && checktime()) {
-		$content = '../challenge.php';
+	if (isset($_GET['problem']) && checktime()) {
+		$content = '../problem.php';
 	}
 	else if (isset($_GET['submit']) && checktime()) {
 		$content = '../submit.php';
@@ -85,7 +85,10 @@ else {
 			display: none;
 			width: 100%;
 		}
-		.scores tr:first-child,.scoreboard tr:first-child {
+		tr:nth-child(1) {
+			background-color: #ccccec;
+		}
+		.scores tr:nth-child(2),.scoreboard tr:nth-child(2) {
 			background-color: #faffac;
 		}
 		.score-selector:hover {
@@ -170,7 +173,7 @@ else {
 		<h1><a href="./">Joken Marathon Match #1</a></h1>
 		<nav>
 			<ul>
-				<li><a href="?challenge">Challenges</a></li>
+				<li><a href="?problem">Problems</a></li>
 				<li><a href="?submit">Submit</a></li>
 				<li><a href="?scoreboard">Scoreboard</a></li>
 				<?php if (isset($_SESSION['id'])) { ?>

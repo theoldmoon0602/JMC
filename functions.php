@@ -5,7 +5,7 @@ function getStartTime() {
 	return strtotime('2017-02-11');
 }
 function getEndTime() {
-	return strtotime('2017-02-11 12:00');
+//	return strtotime('2017-02-11 12:00');
 	return strtotime('2017-02-24');
 }
 
@@ -73,6 +73,20 @@ function register($params) {
 	return 'Added new user. please log in';
 }
 
+function getUserSubmits($id) {
+	$pdo = db();
+	$stmt = $pdo->prepare('select * from submits where user_id = :user_id order by created_at desc');
+	if (!$stmt) {
+		error_log($pdo->errorInfo()[2]);
+		throw new Exception("unknown error(9). please report to admin");
+	}
+	$stmt->bindValue(':user_id', $id, PDO::PARAM_INT);
+	if (!$stmt->execute()) {
+		error_log($pdo->errorInfo()[2]);
+		throw new Exception("unknown error(9). please report to admin");
+	}
+	return $stmt->fetchAll();
+}
 // getUserInfo
 function getUserInfo($id) {
 	$pdo = db();
@@ -195,13 +209,12 @@ function submit($params, $user_id) {
 	$fname = sprintf('../submits/%s_%d_%d.txt', $id, $problem_id, $user_id);
 	$pfile = getProblems()[$problem_id]['file'];
 	file_put_contents($fname, $params['spell']); 
-	$submitid = insertSubmit($problem_id, $user_id, $params['spell']);
-	exec(sprintf("nohup php ../submitscript.php %s %s %d 1>&2 &", $pfile, $fname, $submitid));
+	exec(sprintf("nohup php ../submitscript.php %s %s %d %d  1>&2 &", $pfile, $fname, $problem_id, $user_id));
 }
 
-function insertSubmit($problem_id, $user_id, $spell) {
+function insertSubmit($problem_id, $user_id, $spell, $score) {
 	$pdo = db();
-	$stmt = $pdo->prepare('insert into submits(problem_id, user_id, score, created_at, input) values (:problem_id, :user_id, null, :created_at, :input)');
+	$stmt = $pdo->prepare('insert into submits(problem_id, user_id, score, created_at, input) values (:problem_id, :user_id, :score, :created_at, :input)');
 
 	if (!$stmt) {
 		throw new Exception("unknown error(6). please report to admin");
@@ -210,25 +223,11 @@ function insertSubmit($problem_id, $user_id, $spell) {
 	$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
 	$stmt->bindValue(':created_at', microtime(true), PDO::PARAM_STR); //!!
 	$stmt->bindValue(':input', $spell, PDO::PARAM_STR);
+	$stmt->bindValue(':score', $score, PDO::PARAM_STR);
 
 	if (!$stmt->execute()) {
 		throw new Exception("unknown error(6). please report to admin");
 	}
-
-	// get id of submitted 
-	$stmt = $pdo->prepare('select id from submits where problem_id = :problem_id and user_id = :user_id and score is null order by created_at desc limit 1');
-	if (!$stmt) {
-		error_log($pdo->errorInfo()[2]);
-		throw new Exception("unknown error(6). please report to admin");
-	}
-	$stmt->bindValue(':problem_id', $problem_id, PDO::PARAM_INT);
-	$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-
-	if (!$stmt->execute()) {
-		throw new Exception("unknown error(6). please report to admin");
-	}
-
-	return $stmt->fetchAll()[0]['id'];
 }
 
 function updateHandicap($handicap, $id) {

@@ -4,6 +4,7 @@
 	$scoreboard = getScoreboard(true);
 ?>
 <table class="scoreboard">
+	<tr><th>Rank</th><th>Username</th><th>Points</th></tr>
 	<?php foreach ($scoreboard as $i => $v) { ?>
 	<tr>
 	<th><?php o($i+1); ?></th>
@@ -20,6 +21,7 @@
 <div>
 	<h3 class="score-selector" data-id="<?php o($i);?>"><?php o($p['name']); ?></h3>
 	<table class="scores" id="<?php o($i); ?>">
+	<tr><th>Rank</th><th>Username</th><th>Score</th><th>Point</th></tr>
 	<?php $ranking = getRankingAbout($i, true); ?>
 	<?php foreach ($ranking as $j => $r) { ?>
 	<tr>

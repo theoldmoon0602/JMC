@@ -8,16 +8,4 @@ if ($return != 0) {
 	exit;
 }
 
-$pdo = db();
-$stmt = $pdo->prepare('update submits set score=:score where id=:id');
-if (!$stmt) {
-	error_log($pdo->errorInfo()[2]);
-	exit;
-}
-$stmt->bindValue(':score', $output[0], PDO::PARAM_STR);
-$stmt->bindValue(':id', $argv[3], PDO::PARAM_INT);
-if (!$stmt->execute()) {
-	error_log($pdo->errorInfo()[2]);
-	exit;
-}
-
+insertSubmit($argv[3], $argv[4], file_get_contents($argv[2]), $score);

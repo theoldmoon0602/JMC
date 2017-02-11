@@ -6,6 +6,7 @@ $pnum = 0;
 <h2>Challenges</h2>
 
 <table>
+	<tr><th>Problem</th><th>Top User</th><th>Score</th></tr>
 <?php $problems = getProblems(); ?>
 <?php for ($i = 0; $i < count($problems); $i++) { ?>
 	<?php 
