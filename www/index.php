@@ -7,6 +7,7 @@ session_start();
 $msgs = [];
 $errors = [];
 
+
 if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['password'])) {
 	try {
 		$msgs []= login($_POST);
@@ -21,8 +22,7 @@ else if (isset($_POST['register']) && isset($_POST['username']) && isset($_POST[
 		$errors []= $e->getMessage();
 	}
 }
-
-if (isset($_POST['submit']) &&
+else if (isset($_POST['submit']) &&
 	isset($_POST['problem_id']) &&
 	0 <= $_POST['problem_id'] && $_POST['problem_id'] < count(getProblems()) &&
 	isset($_POST['spell']) &&
@@ -36,8 +36,7 @@ if (isset($_POST['submit']) &&
 		$errors []= $e->getMessage();
 	}
 }
-
-if (isset($_POST['user']) &&
+else if (isset($_POST['user']) &&
 	isset($_POST['handicap']) &&
 	100 <= $_POST['handicap'] && $_POST['handicap'] <= 110 &&
 	checktime(strtotime("+1 day"))) {
@@ -167,9 +166,8 @@ else {
 </head>
 <body>
 <script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
+  src="jquery-3.1.1.min.js"
+  ></script>
 <div id="container">
 	<header>
 		<h1><a href="./">Joken Marathon Contest #1</a></h1>
@@ -197,7 +195,7 @@ else {
 			<li><?php o($e); ?></li>
 		<?php } ?>
 		</ul>
-		<?php include($content); ?>
+		<?php include_once($content); ?>
 	</main>
 </div>
 </body>

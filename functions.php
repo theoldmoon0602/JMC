@@ -1,28 +1,26 @@
 <?php
 
+require_once('settings.php');
+
 function getStartTime() {
-	//return strtotime('2017-02-18 10:00');
-	return strtotime('2017-02-11');
+	return strtotime(START_DATE);
 }
 function getEndTime() {
 //	return strtotime('2017-02-11 12:00');
-	return strtotime('2017-02-24');
+	return strtotime(END_DATE);
 }
 
 function getProblems() {
-	$problems = [];
-	foreach(['minimal', 'small', 'regular', 'large', 'huge'] as $v) {
-		for ($i = 1; $i <= 3; $i++) {
-			$problems []= [
-				'name' => $v . "_$i",
-				'file' => 'problems/'.$v . "_$i.txt",
+	static $problems = [];
+	if (count($problems) == 0) {
+	       	foreach(PROBLEMS as $p) {
+			$ary = [
+				'name' => $p,
+				'file' => 'problems/'.$p.'.txt',
 			];
+			$problems []= $ary;
 		}
 	}
-	$problems []= [
-		'name' => 'mega',
-		'file' => 'problems/mega.txt',
-	];
 	return $problems;
 }
 
