@@ -27,6 +27,8 @@ else if (isset($_POST['submit']) &&
 	0 <= $_POST['problem_id'] && $_POST['problem_id'] < count(getProblems()) &&
 	isset($_POST['spell']) &&
 	isset($_SESSION['id']) &&
+	isset($_POST['csrf']) && 
+	csrfcheck($_POST['csrf']) && 
 	checktime()) {
 
 	try {

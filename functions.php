@@ -24,6 +24,14 @@ function getProblems() {
 	return $problems;
 }
 
+function csrfcheck($csrf) {
+	return password_verify(session_id(), $csrf);
+}
+
+function csrf() {
+	return password_hash(session_id(), PASSWORD_DEFAULT);
+}
+
 function checktime($t = null) {
 	if (is_null($t)) {
 		$t = time();

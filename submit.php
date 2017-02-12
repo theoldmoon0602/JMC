@@ -13,6 +13,7 @@
 	<dt>改良の魔法</dt>
 	<dd><textarea name="spell" class="spell"></textarea></dd>
 	<dt><input type="submit" name="submit" value="提出する"></dt>
+	<input type="hidden" value="<?php o(csrf()); ?>" name="csrf">
 </dl>
 </form>
 </div>
