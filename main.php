@@ -1,5 +1,5 @@
 <div>
-	<h2>WELCOME TO JOKEN MARATHON Match</h2>
+	<h2>WELCOME TO Joken Marathon Contest</h2>
 <div class="informatino">
 <h3>Information</h3>
 <ul>

@@ -80,6 +80,8 @@ else {
 <!doctype html>
 <html>
 <head>
+	<meta charset="utf-8">
+	<title>Joken Marathon Contest</title>
 	<style>
 		.scores {
 			display: none;
@@ -170,7 +172,7 @@ else {
   crossorigin="anonymous"></script>
 <div id="container">
 	<header>
-		<h1><a href="./">Joken Marathon Match #1</a></h1>
+		<h1><a href="./">Joken Marathon Contest #1</a></h1>
 		<nav>
 			<ul>
 				<li><a href="?problem">Problems</a></li>
