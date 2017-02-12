@@ -90,5 +90,9 @@
 </pre>
 </p>
 
-	</div>
+<p>
+	<img src="example.png">
+</p>
+
+</div>
 </div>
