@@ -2,6 +2,24 @@
 
 require_once('settings.php');
 
+function slackSend($msg) {
+	$url = SLACK_URL;
+	$message = [
+		'username' => SLACK_BOTNAME,
+		'text' => $msg,
+		'channel' => SLACK_CHANNEL
+	];	
+	$options = [
+		'http' => [
+			'method' => 'POST',
+			'header' => 'Content-Type: application/json',
+			'content' => json_encode($message)
+		],
+	];
+
+	file_get_contents($url, false, stream_context_create($options));
+}
+
 function getStartTime() {
 	return strtotime(START_DATE);
 }
@@ -216,6 +234,20 @@ function submit($params, $user_id) {
 	$pfile = getProblems()[$problem_id]['file'];
 	file_put_contents($fname, $params['spell']); 
 	exec(sprintf("nohup php ../submitscript.php %s %s %d %d  1>&2 &", $pfile, $fname, $problem_id, $user_id));
+}
+
+function getRankOfScore($problem_id, $user_id, $score) {
+	$pdo = db();
+	$stmt = $pdo->prepare('select user_id, score*handicap as score, handicap, submits.score as rawscore, max(created_at) from submits join users on user_id=users.id where problem_id=:problem_id and submits.score is not null group by user_id order by score desc');
+	if (!$stmt) {
+		return -1;
+	}
+	$stmt->bindValue(':problem_id', $problem_id, PDO::PARAM_STR);
+	if (!$stmt->execute()) {
+		return -1;
+	}
+	$r = $stmt->fetchAll();
+	return $r;
 }
 
 function insertSubmit($problem_id, $user_id, $spell, $score) {

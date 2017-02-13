@@ -84,6 +84,14 @@ else {
 	<meta charset="utf-8">
 	<title>Joken Marathon Contest</title>
 	<style>
+		.important {
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			background-color: #eee;
+		}
+		.overline {
+			text-decoration: overline;
+		}
 		.scores {
 			display: none;
 			width: 100%;
