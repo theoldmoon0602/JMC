@@ -2,7 +2,7 @@
 
 
 /* const value is global scope! */
-const START_DATE = '2017-02-11';
+const START_DATE = '2017-02-10';
 const END_DATE = '2017-02-24';
 
 const PROBLEMS = [
@@ -23,3 +23,7 @@ const PROBLEMS = [
 	'huge_3',
 	'mega'
 ];
+
+const SLACK_BOTNAME='JMC bot';
+const SLACK_URL = 'URL HERE';
+const SLACK_CHANNEL = '#random';
