@@ -84,6 +84,9 @@ else {
 	<meta charset="utf-8">
 	<title>Joken Marathon Contest</title>
 	<style>
+		img {
+			max-width: 100%;
+		}
 		.important {
 			border: 1px solid #ccc;
 			border-radius: 4px;
