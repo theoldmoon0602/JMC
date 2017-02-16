@@ -5,6 +5,9 @@
 const START_DATE = '2017-02-10';
 const END_DATE = '2017-02-24';
 
+const HANDICAP_MIN = 1.0;
+const HANDICAP_MAX = 1.1;
+
 const PROBLEMS = [
 	'minimal_1',
 	'minimal_2',

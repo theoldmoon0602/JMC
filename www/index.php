@@ -40,11 +40,11 @@ else if (isset($_POST['submit']) &&
 }
 else if (isset($_POST['user']) &&
 	isset($_POST['handicap']) &&
-	100 <= $_POST['handicap'] && $_POST['handicap'] <= 110 &&
+	HANDICAP_MIN*100 <= $_POST['handicap'] && $_POST['handicap'] <= HANDICAP_MAX*100 &&
 	checktime(strtotime("+1 day"))) {
 
 	try {
-		updateHandicap($_POST['handicap'], $_SESSION['id']);
+		updateHandicap((int)$_POST['handicap'], $_SESSION['id']);
 		$msgs []= 'updated';
 	} catch (Exception $e) {
 		$errors []= $e->getMessage();

@@ -4,7 +4,7 @@
 <form action='#' method="post">
 <dl>
 	<dt>ハンディキャップ</dt>
-	<dd><input type="number" max="110" min="100" value="<?php o(intval(getUserInfo($_SESSION['id'])['handicap']*100)); ?>" name="handicap" required>%</dd>
+	<dd><input type="number" max="<?= intval(HANDICAP_MAX*100) ?>" min="<?= intval(HANDICAP_MIN*100) ?>" value="<?php o(intval(getUserInfo($_SESSION['id'])['handicap']*100)); ?>" name="handicap" required>%</dd>
 	<dt><input type="submit" name="user" value="update"></dt>
 </dl>
 </form>
