@@ -31,5 +31,5 @@ foreach (getRankingAbout($problem_id) as $i => $r) {
 
 if (!is_null($score)) {
 	$username = getUserInfo($user_id)['username']; 
-	slackSend("$username submitted to problem " PROBLEMS[$problem_id] . ". score is $score, rank: $rank => $newrank");
+	slackSend("$username submitted to problem " . PROBLEMS[$problem_id] . ". score is $score, rank: $rank => $newrank");
 }
