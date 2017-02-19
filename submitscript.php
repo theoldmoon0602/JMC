@@ -7,7 +7,7 @@ $user_id = $argv[4];
 
 
 require_once('functions.php');
-rquiree_once('settings.php');
+require_once('settings.php');
 $score = exec("../calcscore $inputfile $operation 2>&1", $output, $return);
 
 if ($return != 0) {
